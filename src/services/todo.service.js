@@ -61,12 +61,13 @@ function save(todo) {
     else return _add(todo)
 }
 
-function _add({ task, speed }) {
+function _add(todo) {
+    console.log(todo)
     let todos = _loadFromStorage()
-    const todo = _createTodo(task, speed)
-    todos = [todo, ...todos]
+    const newTodo = _createTodo(todo.task, todo.isDone)
+    todos = [newTodo, ...todos]
     _saveToStorage(todos)
-    return Promise.resolve(todo)
+    return Promise.resolve(newTodo)
 }
 
 function _update(todoToUpdate) {
@@ -80,13 +81,12 @@ function getTasks() {
     return gTodos
 }
 
-function _createTodo(task, speed = utilService.getRandomIntInclusive(1, 200)) {
+function _createTodo(task, isDone) {
     return {
         _id: utilService.makeId(),
         task,
-        speed,
         desc: utilService.makeLorem(),
-        isDone: false
+        isDone
     }
 }
 

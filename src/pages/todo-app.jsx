@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react"
+import { Edit } from "../cmps/edit"
 import { List } from "../cmps/list"
 import { storageService } from "../services/storage.service"
 import { todoService } from "../services/todo.service"
@@ -25,6 +26,7 @@ export const TodoApp = () => {
     // R - V
     // U
     // D - V
+
     const onRemove = async (todoId) => {
         console.log('remove...')
         console.log('todoId:', todoId)
@@ -34,13 +36,11 @@ export const TodoApp = () => {
         setTodos(newTodos)
     }
 
-    const onAddTodo = async (todo = { task: "smile", isDone: true }) => {
+    const onAddTodo = async (todo) => {
         console.log('onAddTodo...')
         const newTodo = await todoService.save(todo)
-
         const newTodos = [...todos, newTodo]
         setTodos(newTodos)
-
     }
 
     return (
@@ -48,6 +48,8 @@ export const TodoApp = () => {
             <h1>todo app</h1>
             <button onClick={onAddTodo}>Add</button>
             <List onRemove={onRemove} todos={todos} />
+            <Edit onAddTodo={onAddTodo} />
+
         </section>
 
     )
