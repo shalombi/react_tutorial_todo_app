@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react"
 import { Edit } from "../cmps/edit"
+import { FilterBy } from "../cmps/filterBy"
 import { List } from "../cmps/list"
 import { storageService } from "../services/storage.service"
 import { todoService } from "../services/todo.service"
@@ -15,17 +16,19 @@ export const TodoApp = () => {
     }, [])
 
 
-    const loadTodos = async () => {
-        const todos = await todoService.query()
+    const loadTodos = async (filterBy) => {
+        const todos = await todoService.query(filterBy)
         // console.log('todos:',todos)
         setTodos(todos)
 
 
     }
-    // C 
+    // C - V
     // R - V
-    // U
+    // U 
     // D - V
+
+    // Filtering
 
     const onRemove = async (todoId) => {
         console.log('remove...')
@@ -43,14 +46,17 @@ export const TodoApp = () => {
         setTodos(newTodos)
     }
 
+    const onFilterBy = (filterBy)=>{
+    //    if(ev) ev.preventDefault()
+        loadTodos(filterBy)
+    }
     return (
         <section className="todo-app">
             <h1>todo app</h1>
-            <button onClick={onAddTodo}>Add</button>
+            <FilterBy onFilterBy={onFilterBy} />
             <List onRemove={onRemove} todos={todos} />
             <Edit onAddTodo={onAddTodo} />
-
         </section>
-
     )
+
 }

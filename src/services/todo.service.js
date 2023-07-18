@@ -22,13 +22,12 @@ function query(filterBy) {
     }
 
     if (filterBy) {
-        let { task, minSpeed, maxSpeed } = filterBy
-        if (!minSpeed) minSpeed = 0;
-        if (!maxSpeed) maxSpeed = Infinity
+        let { task } = filterBy
+
+        console.log('task:', task)
         todos = todos.filter(todo => (
-            todo.task.includes(task) &&
-            todo.speed >= minSpeed &&
-            todo.speed <= maxSpeed
+            todo.task.includes(task)
+
         ))
     }
 

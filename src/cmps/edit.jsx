@@ -21,7 +21,7 @@ export const Edit = ({ onAddTodo }) => {
 
     return (
         <section className="edit">
-            <form onSubmit={()=>onAddTodo(todo)}>
+            <form onSubmit={() => onAddTodo(todo)}>
 
                 <input
                     type="text"
@@ -31,8 +31,9 @@ export const Edit = ({ onAddTodo }) => {
                 />
 
                 <select name="isDone" value={todo.isDone} onChange={handleChange}>
-                    <option value={true}>A</option>
-                    <option value={false}>B</option>
+                    <option >Select</option>
+                    <option value={true}>Done</option>
+                    <option value={false}>Not done</option>
                 </select>
 
                 <button>save</button>
